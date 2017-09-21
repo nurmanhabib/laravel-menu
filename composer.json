@@ -2,7 +2,8 @@
     "name": "nurmanhabib/laravel-menu",
     "type": "library",
     "require": {
-        "illuminate/support": "^5.0"
+        "illuminate/support": "^5.0",
+        "nurmanhabib/navigator": "^4.0"
     },
     "license": "MIT",
     "authors": [
