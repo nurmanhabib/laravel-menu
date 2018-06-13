@@ -12,10 +12,20 @@
             "email": "nurmanhabib@yahoo.co.id"
         }
     ],
-  "autoload": {
-    "psr-4": {
-      "Nurmanhabib\\LaravelMenu\\": "src/"
-    }
-  },
+    "autoload": {
+        "psr-4": {
+            "Nurmanhabib\\LaravelMenu\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nurmanhabib\\LaravelMenu\\MenuServiceProvider"
+            ],
+            "aliases": {
+                "Menu": "Nurmanhabib\\LaravelMenu\\Facades\\Menu"
+            }
+        }
+    },
     "minimum-stability": "stable"
 }
