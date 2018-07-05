@@ -1,11 +1,21 @@
 {
     "name": "nurmanhabib/laravel-menu",
+    "description": "Make it easy to create navigation menus on Laravel",
     "type": "library",
     "require": {
         "illuminate/support": "^5.0",
         "nurmanhabib/navigator": "^4.1"
     },
     "license": "MIT",
+    "keywords": [
+        "laravel menu",
+        "laravel navigation",
+        "navigation",
+        "navigator",
+        "menu",
+        "sidebar",
+        "navbar"
+    ],
     "authors": [
         {
             "name": "Habib Nurrahman",
