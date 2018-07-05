@@ -3,7 +3,6 @@
 namespace Nurmanhabib\LaravelMenu\Concerns;
 
 use Nurmanhabib\Navigator\Items\Nav;
-use Nurmanhabib\Navigator\Modifiers\NavFullUrl;
 use Nurmanhabib\Navigator\NavCollection;
 
 trait NavCollectionManage
@@ -35,9 +34,14 @@ trait NavCollectionManage
         return array_last($this->navStack);
     }
 
-    public function link($text, $url = '#', $icon = null)
+    public function logout($text = 'Logout', $url = 'logout', $icon = null)
     {
-        return $this->getCurrent()->addLink($text, $url, $icon);
+        return $this->link($text, $url, $icon, 'POST');
+    }
+
+    public function link($text, $url = '#', $icon = null, $method = 'GET')
+    {
+        return $this->getCurrent()->addLink($text, $url, $icon)->setData(compact('method'));
     }
 
     public function heading($text)
@@ -75,6 +79,6 @@ trait NavCollectionManage
 
     public function add(Nav $nav)
     {
-        return $this->getCurrent()->add(new NavFullUrl($nav));
+        return $this->getCurrent()->add($nav);
     }
 }

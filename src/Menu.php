@@ -2,15 +2,10 @@
 
 namespace Nurmanhabib\LaravelMenu;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Nurmanhabib\LaravelMenu\Concerns\NavCollectionManage;
 use Nurmanhabib\Navigator\Activators\RequestActivator;
-use Nurmanhabib\Navigator\Items\Nav;
-use Nurmanhabib\Navigator\Modifiers\NavFullUrl;
 use Nurmanhabib\Navigator\NavCollection;
-use Nurmanhabib\Navigator\Navigator;
-use Nurmanhabib\Navigator\Renders\NavRender;
 
 class Menu
 {
@@ -21,9 +16,15 @@ class Menu
      */
     protected $navigators;
 
+    /**
+     * @var Collection
+     */
     protected $renders;
 
-    protected $globalActivator;
+    /**
+     * @var Collection
+     */
+    protected $views;
 
     /**
      * Menu constructor.
@@ -33,16 +34,17 @@ class Menu
     {
         $this->navigators = new Collection($navigators);
         $this->renders = new Collection;
+        $this->views = new Collection;
     }
 
     /**
      * @param string $name
      * @param callable $callback
-     * @return Navigator
+     * @return LaravelNavigator
      */
     public function make($name = 'default', callable $callback)
     {
-        $navigator = new Navigator($menu = new NavCollection);
+        $navigator = new LaravelNavigator($menu = new NavCollection);
         $navigator->setActivator(new RequestActivator(request()));
 
         $this->navigators->put($name, $navigator);
@@ -64,18 +66,23 @@ class Menu
         return $this->navigators;
     }
 
+    public function render($name = 'default')
+    {
+        return $this->get($name)->render();
+    }
+
     /**
      * @param string $name
      * @param callable|null $callback
-     * @return Navigator
+     * @return LaravelNavigator
      */
     public function get($name = 'default', callable $callback = null)
     {
-        $navigator = $this->navigators->get($name);
+        if (!$this->navigators->has($name)) {
+            return new LaravelNavigator(new NavCollection);
+        }
 
-        $navigator->transform(function (Nav $nav) {
-            return new NavFullUrl($nav);
-        });
+        $navigator = $this->navigators->get($name);
 
         if ($callback) {
             $callback($navigator->getOriginalMenu());
@@ -84,8 +91,25 @@ class Menu
         return $navigator;
     }
 
-    public function render($name = 'default')
+    /**
+     * @param string $alias
+     * @param string $view
+     * @return Menu
+     */
+    public function registerView($alias, $view)
     {
-        return $this->get($name)->render();
+        $this->views->put($alias, $view);
+
+        return $this;
+    }
+
+    public function hasView($view)
+    {
+        return $this->views->has($view);
+    }
+
+    public function getView($view)
+    {
+        return $this->views->get($view, $view);
     }
 }

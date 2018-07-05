@@ -19,6 +19,10 @@ class NavViewRender implements NavRender
 
     public function render(NavCollection $menu)
     {
+        if (!view()->exists($this->view)) {
+            return 'View [' . $this->view . '] not found';
+        }
+
         return view($this->view, compact('menu'));
     }
 }

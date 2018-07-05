@@ -13,5 +13,9 @@ return [
 
     'renders' => [
         'simple' => \Nurmanhabib\Navigator\Renders\NavSimple::class
-    ]
+    ],
+
+    'views' => [
+        'adminto' => 'adminto::menus.sidebar.menu',
+    ],
 ];

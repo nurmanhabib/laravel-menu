@@ -3,7 +3,7 @@
     "type": "library",
     "require": {
         "illuminate/support": "^5.0",
-        "nurmanhabib/navigator": "^4.0"
+        "nurmanhabib/navigator": "^4.1"
     },
     "license": "MIT",
     "authors": [
