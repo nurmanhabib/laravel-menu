@@ -8,12 +8,22 @@ class MenuServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->registerConfig();
+        $this->registerConainer();
+        $this->registerHelpers();
+    }
+
+    protected function registerConfig()
+    {
         $this->publishes([
             __DIR__.'/../config/laravel-menu.php' => config_path('laravel-menu.php')
-        ]);
+        ], 'config');
 
         $this->mergeConfigFrom(__DIR__.'/../config/laravel-menu.php', 'laravel-menu');
+    }
 
+    protected function registerConainer()
+    {
         $this->app->singleton('menu', function ($app) {
             $menu = new Menu;
 
@@ -23,6 +33,11 @@ class MenuServiceProvider extends ServiceProvider
 
             return $menu;
         });
+    }
+
+    protected function registerHelpers()
+    {
+        require_once __DIR__.'/../helpers/helpers.php';
     }
 
     public function register()
