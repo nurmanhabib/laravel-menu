@@ -11,6 +11,7 @@ class MenuServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerConainer();
         $this->registerHelpers();
+        $this->registerViews();
     }
 
     protected function registerConfig()
@@ -38,6 +39,15 @@ class MenuServiceProvider extends ServiceProvider
     protected function registerHelpers()
     {
         require_once __DIR__.'/../helpers/helpers.php';
+    }
+
+    protected function registerViews()
+    {
+        $this->loadViewsFrom(__DIR__.'/../resources/views/menus', 'menus');
+
+        $this->publishes([
+            __DIR__.'/../resources/views/menus' => resource_path('views/vendor/menus')
+        ], 'views');
     }
 
     public function register()

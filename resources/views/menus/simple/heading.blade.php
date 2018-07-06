@@ -1,0 +1,1 @@
+<li>{{ $nav->getText() }}</li>

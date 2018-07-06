@@ -112,4 +112,9 @@ class Menu
     {
         return $this->views->get($view, $view);
     }
+
+    public function getDefaultView()
+    {
+        return config('laravel-menu.default.view');
+    }
 }

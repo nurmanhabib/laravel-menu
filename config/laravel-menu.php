@@ -2,20 +2,19 @@
 
 return [
     'default' => [
-        'activator' => 'request',
-        'render' => 'simple',
-    ],
-
-    'activators' => [
-        'none' => \Nurmanhabib\Navigator\Activators\NoneActivator::class,
-        'request' => \Nurmanhabib\Navigator\Activators\RequestActivator::class,
-    ],
-
-    'renders' => [
-        'simple' => \Nurmanhabib\Navigator\Renders\NavSimple::class
+        'view' => 'simple',
     ],
 
     'views' => [
+        'simple' => 'menus::simple.menu',
+        'sb-nav-stacked' => 'menus::sb-nav-stacked.menu',
+        'sbadmin2' => 'menus::sbadmin2.menu',
         'adminto' => 'adminto::menus.sidebar.menu',
     ],
+
+    // 'menus' => [
+    //     'sidebar' => [
+    //         'view' => 'sb-nav-stacked'
+    //     ]
+    // ]
 ];
