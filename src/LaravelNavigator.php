@@ -21,7 +21,9 @@ class LaravelNavigator extends Navigator
     {
         $view = app('menu')->getView($view);
 
-        return $this->setRender(new NavViewRender($view));
+        $this->menu->setRenderer(new NavViewRender($view));
+
+        return $this;
     }
 
     public function renderView($view)

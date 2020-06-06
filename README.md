@@ -1,6 +1,8 @@
 # Welcome to Laravel Menu!
 
-Generate multi navigation menus with unique names, can be displayed anywhere. Custom templating. Support Laravel 5.
+Generate multi navigation menus with unique names, can be displayed anywhere. Custom templating. Support Laravel 5, 6, 7.
+
+![Alt image](screenshoot.png)
 
 ------
 
@@ -52,21 +54,35 @@ You can create in the routes files, middleware, or service providers that you cu
 ```php
 <?php
 
-Menu::make('sidebar', function () {
-    Menu::link('Dashboard', route('home'), 'view-dashboard');
+Menu::make('sidebar', function ($menu) {
+    Menu::link('Home', 'home')->setIcon('fas fa-home');
+    Menu::link('Article', 'articles')->setIcon('fas fa-newspaper')
+        ->setData([
+            'badge' => [
+                'type' => 'warning',
+                'text' => '16'
+            ]
+        ]);
 
-    Menu::dropdown('Users', function () {
-        Menu::link('All', 'users');
-        Menu::link('Add New User', 'users/create');
-    }, 'accounts');
+    Menu::link('Comment', 'comments')->setIcon('fas fa-comments')
+        ->setData([
+            'badge' => [
+                'type' => 'primary',
+                'text' => 'New'
+            ]
+        ]);
 
-    Menu::link('Posts', 'posts', 'paper');
-    
-    Menu::dropdown('Settings', function () {
-        Menu::link('Date and Time', 'settings/date-time');
-        Menu::link('Other Setting', 'settings/other');
-    }, 'wrench');
+    Menu::dropdown('Services', function () {
+        Menu::link('Service 1', 'services/one');
+        Menu::link('Service 2', 'services/two');
+    });
+
+    Menu::heading('Account');
+
+    Menu::link('Change Password')->setIcon('fas fa-key');
+    Menu::logout()->setIcon('fas fa-sign-out-alt');
 });
+
 ```
 
 
@@ -78,7 +94,7 @@ Menu::make('account', function () {
 
     Menu::separate();
 
-	Menu::link('Change Password', url('change-password'), 'view-dashboard');
+    Menu::link('Change Password', url('change-password'), 'view-dashboard');
     Menu::logout();
     
     // Alternative to
@@ -87,6 +103,12 @@ Menu::make('account', function () {
 ```
 
 
+
+#### Set View
+
+```php
+Menu::get('sidebar')->setView('admin-lte');
+```
 
 
 #### Render to View
@@ -117,6 +139,18 @@ To be able to customize the navigation with view
 
 ```php
 Menu::get('sidebar')->setView('view.name');
+```
+
+Available default views:
+
+```php
+'views' => [
+    'simple' => 'menus::simple.menu',
+    'bs-nav-stacked' => 'menus::bs-nav-stacked.menu',
+    'sbadmin2' => 'menus::sbadmin2.menu',
+    'adminto' => 'adminto::menus.sidebar.menu',
+    'admin-lte' => 'menus::admin-lte.menus',
+]
 ```
 
 Then you can customize `view.name` and receive `$menu` variable `Nurmanhabib\Navigator\NavCollection`
@@ -159,12 +193,12 @@ Then you can customize `view.name` and receive `$menu` variable `Nurmanhabib\Nav
 ```
 
 
-## Custom Render
+## Custom Renderer
 
 ```php
 use Nurmanhabib\LaravelMenu\Renders\NavViewRender;
 
-Menu::get('sidebar')->setRender(new NavViewRender('view.name'));
+Menu::get('sidebar')->setRenderer(new NavViewRender('view.name'));
 ```
 
 ------
@@ -196,3 +230,7 @@ $collection->addParent('Text Parent', callback($child), 'icon', '#');
 $collection->add($nav);
 $collection->getItems();
 ```
+
+## Contributing
+
+I apologize if the documentation is still not perfect, if you are willing to contribute to the documentation please do a Pull Request. We also feel happy if we want to contribute to open source.
