@@ -1,6 +1,8 @@
 # Welcome to Laravel Menu!
 
-Generate multi navigation menus with unique names, can be displayed anywhere. Custom templating. Support Laravel 5.
+Generate multi navigation menus with unique names, can be displayed anywhere. Custom templating. Support Laravel 5, 6, 7.
+
+![Alt image](screenshoot.png)
 
 ------
 
