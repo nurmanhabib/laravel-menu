@@ -3,8 +3,8 @@
     "description": "Make it easy to create navigation menus on Laravel",
     "type": "library",
     "require": {
-        "illuminate/support": "^5.0",
-        "nurmanhabib/navigator": "^4.1"
+        "laravel/framework": ">5.0",
+        "nurmanhabib/navigator": "^5.0"
     },
     "license": "MIT",
     "keywords": [

@@ -4,7 +4,6 @@ namespace Nurmanhabib\LaravelMenu;
 
 use Illuminate\Support\Collection;
 use Nurmanhabib\LaravelMenu\Concerns\NavCollectionManage;
-use Nurmanhabib\Navigator\Activators\RequestActivator;
 use Nurmanhabib\Navigator\NavCollection;
 
 class Menu
@@ -45,7 +44,6 @@ class Menu
     public function make($name = 'default', callable $callback)
     {
         $navigator = new LaravelNavigator($menu = new NavCollection);
-        $navigator->setActivator(new RequestActivator(request()));
 
         $this->navigators->put($name, $navigator);
 
@@ -79,7 +77,7 @@ class Menu
     public function get($name = 'default', callable $callback = null)
     {
         if (!$this->navigators->has($name)) {
-            return new LaravelNavigator(new NavCollection);
+            throw new \Exception('Menu not found');
         }
 
         $navigator = $this->navigators->get($name);

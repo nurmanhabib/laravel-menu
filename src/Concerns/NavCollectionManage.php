@@ -31,7 +31,7 @@ trait NavCollectionManage
      */
     public function getCurrent()
     {
-        return array_last($this->navStack);
+        return end($this->navStack);
     }
 
     public function logout($text = 'Logout', $url = 'logout', $icon = null)
