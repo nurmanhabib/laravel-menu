@@ -105,6 +105,8 @@ Menu::make('account', function () {
 
 ### Make From Array
 
+You might be able to make it from another data source (for example: a database) and then process it into array data and turn it into a menu.
+
 ```php
 <?php
 
@@ -167,6 +169,13 @@ $items = [
  ];
 
 Menu::makeFromArray('sidebar', $items);
+
+// or
+
+Menu::make('sidebar', function () use ($items) {
+    Menu::arrays($items);
+});
+
 ```
 
 

@@ -2,6 +2,7 @@
 
 namespace Nurmanhabib\LaravelMenu\Concerns;
 
+use Nurmanhabib\Navigator\Factories\ArrayNavCollectionFactory;
 use Nurmanhabib\Navigator\Items\Nav;
 use Nurmanhabib\Navigator\NavCollection;
 
@@ -32,6 +33,16 @@ trait NavCollectionManage
     public function getCurrent()
     {
         return end($this->navStack);
+    }
+
+    public function arrays(array $items)
+    {
+        return $this->getCurrent()->addArrays($items);
+    }
+
+    public function array(array $item)
+    {
+        return $this->getCurrent()->addArray($item);
     }
 
     public function logout($text = 'Logout', $url = 'logout', $icon = null)
