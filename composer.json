@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "laravel/framework": ">5.0",
-        "nurmanhabib/navigator": "^5.0"
+        "nurmanhabib/navigator": "^5.0.3"
     },
     "license": "MIT",
     "keywords": [

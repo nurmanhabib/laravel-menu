@@ -103,6 +103,82 @@ Menu::make('account', function () {
 ```
 
 
+### Make From Array
+
+You might be able to make it from another data source (for example: a database) and then process it into array data and turn it into a menu.
+
+```php
+<?php
+
+$items = [
+     [
+         'text' => 'Home',
+         'url' => '/'
+     ],
+     [
+         'text' => 'Berita',
+         'url' => 'berita',
+         'match' => '/berita*'
+     ],
+     [
+         'type' => 'separator'
+     ],
+     [
+         'text' => 'Kategori',
+         'child' => [
+             [
+                 'text' => 'Teknologi',
+                 'url' => 'kategori/teknologi'
+             ],
+             [
+                 'text' => 'Otomotif',
+                 'url' => 'kategori/otomotif'
+             ],
+             [
+                 'text' => 'Lifestyle',
+                 'child' => [
+                     [
+                         'text' => 'Pria',
+                         'url' => 'lifestyle-pria'
+                     ],
+                     [
+                         'text' => 'Wanita',
+                         'url' => 'lifestyle-wanita'
+                     ],
+                 ]
+             ],
+         ]
+     ],
+     [
+         'type' => 'heading',
+         'text' => 'Configuration'
+     ],
+     [
+         'text' => 'Account',
+         'child' => [
+             [
+                 'text' => 'Change Password',
+                 'url' => 'change-password'
+             ],
+             [
+                 'text' => 'Logout',
+                 'url' => 'logout'
+             ],
+         ]
+     ],
+ ];
+
+Menu::makeFromArray('sidebar', $items);
+
+// or
+
+Menu::make('sidebar', function () use ($items) {
+    Menu::arrays($items);
+});
+
+```
+
+
 
 #### Set View
 

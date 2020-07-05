@@ -4,6 +4,7 @@ namespace Nurmanhabib\LaravelMenu;
 
 use Illuminate\Support\Collection;
 use Nurmanhabib\LaravelMenu\Concerns\NavCollectionManage;
+use Nurmanhabib\Navigator\Factories\ArrayNavCollectionFactory;
 use Nurmanhabib\Navigator\NavCollection;
 
 class Menu
@@ -52,6 +53,22 @@ class Menu
         $callback($menu);
 
         $this->clearCurrent();
+
+        return $navigator;
+    }
+
+    /**
+     * @param string $name
+     * @param array $items
+     * @return LaravelNavigator
+     */
+    public function makeFromArray($name = 'default', array $items)
+    {
+        $factory = new ArrayNavCollectionFactory($items);
+
+        $navigator = new LaravelNavigator($menu = $factory->createNavCollection());
+
+        $this->navigators->put($name, $navigator);
 
         return $navigator;
     }
