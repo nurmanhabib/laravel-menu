@@ -42,7 +42,7 @@ class Menu
      * @param callable $callback
      * @return LaravelNavigator
      */
-    public function make($name = 'default', callable $callback)
+    public function make($name = 'default', callable $callback = null)
     {
         $navigator = new LaravelNavigator($menu = new NavCollection);
 
@@ -50,7 +50,9 @@ class Menu
 
         $this->setCurrent($menu);
 
-        $callback($menu);
+        if ($callback) {
+            $callback($menu);
+        }
 
         $this->clearCurrent();
 
@@ -62,7 +64,7 @@ class Menu
      * @param array $items
      * @return LaravelNavigator
      */
-    public function makeFromArray($name = 'default', array $items)
+    public function makeFromArray($name = 'default', array $items = [])
     {
         $factory = new ArrayNavCollectionFactory($items);
 
